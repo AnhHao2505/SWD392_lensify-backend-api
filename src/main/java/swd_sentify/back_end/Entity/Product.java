@@ -16,7 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Tự tăng ID (1, 2, 3...)
-    private Long id;
+    private int id;
 
     @Column(nullable = false) // Không được để trống
     private String name;
