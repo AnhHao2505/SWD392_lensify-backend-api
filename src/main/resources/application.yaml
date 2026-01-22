@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: back_end
+
+  config:
+    import: optional:file:.env[.properties]
+
+  # Database
+  datasource:
+    url: jdbc:mysql://localhost:3306/lensify?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true
+    username: root
+    password: "12345"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_NAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# JWT
+security:
+  jwt:
+    secret-key: ${JWT_SECRET}
+    expiration-time: ${JWT_EXPIRATION}

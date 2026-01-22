@@ -1,33 +1,34 @@
 version: '3.8'
 
 services:
-  # 1. Dịch vụ Database MySQL
   mysqldb:
     image: mysql:8.0
     container_name: eyewear_mysql_container
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=root          # Mật khẩu tài khoản root
-      - MYSQL_DATABASE=eyewear_shop_db    # Tên DB sẽ tự động tạo
     ports:
-      - "3307:3306"                       # Mở cổng 3306 ra máy ngoài
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: eyewear_shop_db
+      MYSQL_USER: sentify_store
+      MYSQL_PASSWORD: 12345
     volumes:
-      - db_data:/var/lib/mysql            # Lưu dữ liệu lại dù có tắt Docker
+      - db_data:/var/lib/mysql
 
-  # 2. Dịch vụ xem DB bằng giao diện web (Optional - nhưng nên dùng)
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: eyewear_phpmyadmin
-    links:
-      - mysqldb
-    environment:
-      PMA_HOST: mysqldb
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
+  backend:
+    build: .
+    container_name: eyewear_backend_container
+    restart: always
     ports:
-      - "8081:80"                         # Truy cập bằng localhost:8081
+      - "8080:8080"
     depends_on:
       - mysqldb
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      JWT_SECRET: mysecret
+      JWT_EXPIRATION: 3600000
+      EMAIL_NAME: yourmail@gmail.com
+      EMAIL_PASSWORD: yourpassword
 
 volumes:
   db_data:
