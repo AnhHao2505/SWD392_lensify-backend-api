@@ -7,9 +7,9 @@ spring:
 
   # Database
   datasource:
-    url: jdbc:mysql://localhost:3306/lensify?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/lensify
     username: root
-    password: "12345"
+    password: 12345
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # Mail
@@ -30,3 +30,20 @@ security:
   jwt:
     secret-key: ${JWT_SECRET}
     expiration-time: ${JWT_EXPIRATION}
+
+# Swagger
+open:
+  api:
+    title: API-service document
+    version: V1.0.0
+    description: API for Eyewear selling
+    licenseUrl: "https://example.com/license"
+    licenseName: API License
+    serversUrl: http://localhost:8080/
+    serversDescription: Server v1
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
