@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://db:3306/lensify?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true
+    username: sentify_store
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

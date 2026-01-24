@@ -27,12 +27,17 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request, HttpServletResponse response) {
-        User user = authService.register(request);
-        String token = jwtService.generateToken(user);
-        addJwtCookie(response, token);
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new AuthResponse("Registration successful", user.getEmail(), user.getName()));
+        try {
+            User user = authService.register(request);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new AuthResponse("Registration successful", user.getEmail(), user.getName()));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new AuthResponse(e.getMessage(), null, null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new AuthResponse("An error occurred during registration", null, null));
+        }
     }
 
     @PostMapping("/login")
