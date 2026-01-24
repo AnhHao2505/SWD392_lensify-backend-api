@@ -2,22 +2,20 @@ spring:
   application:
     name: back_end
 
-  config:
-    import: optional:file:.env[.properties]
-
   # Database
   datasource:
-    url: jdbc:mysql://localhost:3306/lensify
-    username: root
+    url: jdbc:mysql://127.0.0.1:3306/lensify
+    username: sentify_store
     password: 12345
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # Mail
+  # LƯU Ý: Nếu chưa cấu hình biến môi trường EMAIL, hãy tạm thời điền trực tiếp hoặc comment lại để tránh lỗi tiếp theo
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL_NAME}
-    password: ${EMAIL_PASSWORD}
+    username: "dien_email_cua_ban_vao_day@gmail.com"
+    password: "dien_mat_khau_ung_dung_vao_day"
     properties:
       mail:
         smtp:
@@ -25,11 +23,13 @@ spring:
           starttls:
             enable: true
 
-# JWT
+# JWT Configuration (Đã sửa lỗi)
 security:
   jwt:
-    secret-key: ${JWT_SECRET}
-    expiration-time: ${JWT_EXPIRATION}
+    # Điền trực tiếp chuỗi bí mật vào đây
+    secret-key: "mySuperSecretKey1234567890!@#mySuperSecretKey1234567890!@#"
+    # Thời gian hết hạn (tính bằng mili-giây, ví dụ 1 giờ = 3600000)
+    expiration-time: 3600000
 
 # Swagger
 open:
