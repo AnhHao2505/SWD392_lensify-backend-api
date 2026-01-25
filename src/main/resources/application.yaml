@@ -1,3 +1,6 @@
+#server:
+#  port: 8081
+
 spring:
   application:
     name: back_end
@@ -47,3 +50,10 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+
+vnp:
+  base:
+    payment-url: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+  tmn-code: 9A9TA5E4
+  hash-secret: LJMIJZ01YLRWCTND1YCVRM2C1L56SO6V
+  return-url: http://localhost:3000/vn-pay/callback
